@@ -3,7 +3,9 @@
     <div class="container">
       <!-- Header-->
     <div id="header-text">
-      <h2>{{title}}</h2>
+      <a href="https://www.linkedin.com/in/loyolajuan" target="_blank">
+        <h2>{{title}}</h2>
+      </a>
     </div>
     <!-- Bag image-->
     <div id="bag" v-bind:class="{burts:ended}"></div>
@@ -14,7 +16,7 @@
     <!-- Game controls-->
     <div id="controls">
       <button @click="punch" @click.prevent="playSound('http://soundbible.com/mp3/Realistic_Punch-Mark_DiAngelo-1609462330.mp3')" v-show="!ended">Punch</button>
-      <button @click="restart" @click.prevent="playSound('http://soundbible.com/mp3/Boxing_arena_sound-Samantha_Enrico-246597508.mp3')">Reset</button>
+      <button @click="restart" @click.prevent="playSound('http://soundbible.com/mp3/Boxing_arena_sound-Samantha_Enrico-246597508.mp3')" volume="100" >Reset</button>
     </div>
     <!-- Text-->
     <p class="controls__text"> {{ message }}</p>
@@ -39,14 +41,22 @@ body{
   text-align: center;
   color: #333;
 }
-#header-text{
+a{
+text-decoration:underline;
+color: hsl(348, 83%, 37%);
+}
+a:hover{
+text-decoration:none;
+transition: linear 250ms;
+color: hsl(355, 82%, 70%);
+}
+#header-text {
   max-width: 280px;
   font-size: 22px;
   position: relative;
   font-family: 'Gloria Hallelujah', cursive;
   right:-1%;
   margin-bottom: -9%;
-  color: hsl(348, 83%, 37%)
 }
 #bag{
   width: 200px;
@@ -193,6 +203,7 @@ export default {
     playSound (sound) {
       if (sound) {
         const audio = new Audio(sound)
+        audio.volume = 0.2
         audio.play()
       }
     }
